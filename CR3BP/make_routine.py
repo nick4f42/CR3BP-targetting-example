@@ -26,7 +26,7 @@ def make_routine(name, in_symbols, out_eqs=(), result=None, global_vars=(),
         optims (optional): Optimizations to pass to sympy's `optimize`.
             Default is the C99 standard optimizations. See for more details:
             https://docs.sympy.org/latest/modules/codegen.html#sympy.codegen.rewriting.optimize
-    
+
     Returns:
         A sympy.utilities.codegen.Routine object that may be used with a CodeGen
         object.
@@ -37,34 +37,34 @@ def make_routine(name, in_symbols, out_eqs=(), result=None, global_vars=(),
 
     if cse_kwargs is None:
         cse_kwargs = {}
-    
+
     in_args = []
     for s in in_symbols:
         dims = ([(0, dim - 1) for dim in s.shape]
             if isinstance(s, sp.MatrixSymbol) else None)
         in_args.append(InputArgument(s, dimensions=dims))
-    
+
     out_vars = [eq.lhs for eq in out_eqs]
-    
+
     calc_exprs = [eq.rhs.xreplace(var_map) for eq in out_eqs]
 
     opt = lambda expr: _expand_opt(optimize(expr, optims))
-    
+
     if cse:
         if result is not None:
             calc_exprs.append(result.xreplace(var_map))
             common, (*out_exprs, result) = sp.cse(calc_exprs, **cse_kwargs)
         else:
             common, out_exprs = sp.cse(calc_exprs, **cse_kwargs)
-        
+
         local_vars = [Result(opt(expr.xreplace(var_rmap)), var, var)
                         for var, expr in common]
     else:
         out_exprs = calc_exprs
         local_vars = ()
-    
+
     out_args = [OutputArgument(var, var, opt(expr.xreplace(var_rmap)))
                 for var, expr in zip(out_vars, out_exprs)]
-    
+
     results = [] if result is None else [Result(result)]
     return Routine(name, in_args + out_args, results, local_vars, global_vars)

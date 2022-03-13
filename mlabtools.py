@@ -34,8 +34,8 @@ def _lines_source(points):
 
     except (IndexError, TypeError):
         src = mlab.pipeline.scalar_scatter(*points)
-        src.mlab_source.dataset.lines = _line_indices(len(points[0]), 0)     
-    
+        src.mlab_source.dataset.lines = _line_indices(len(points[0]), 0)
+
     src.update()
     return src
 
@@ -65,7 +65,7 @@ def curves(points, **kwargs):
             s is the optional scalar values associated with each point.
         **kwargs: Keyword arguments are passed to `mlab.pipeline.surface`
             https://docs.enthought.com/mayavi/mayavi/auto/mlab_pipeline_other_functions.html#mayavi.tools.pipeline.surface
-        
+
 
     Returns:
         The mayavi surface.
@@ -117,8 +117,8 @@ def sphere(radius,
     Raises:
         ValueError: Did not specify a color or map_filename.
     """
-    if map_filename: 
-        
+    if map_filename:
+
         if any(map_filename.endswith(s) for s in ('jpg', 'jpeg')):
             img = tvtk.JPEGReader()
         elif map_filename.endswith('png'):
@@ -173,4 +173,4 @@ def axes(length, pos=(0, 0, 0), labels=None, label_color=None, label_font='times
             if label_color is not None:
                 txt.property.color = label_color
             txt.actor.text_scale_mode = 'none'
-            
+

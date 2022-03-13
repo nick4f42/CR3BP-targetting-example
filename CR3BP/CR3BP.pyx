@@ -13,7 +13,7 @@ def dS_CR3BP(double t, cnp.ndarray[cnp.double_t, ndim=1] S, double mu):
 
 def dSTM_CR3BP(double t, cnp.ndarray[cnp.double_t, ndim=1] S, double mu):
     """CR3BP derivative of the state function and flattened state transition matrix.
-    
+
     S[:6] = [x, y, z, vx, vy, vz]
     S[6:] = STM.flat
     """

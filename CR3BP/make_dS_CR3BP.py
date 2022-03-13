@@ -40,8 +40,24 @@ if __name__ == '__main__':
     gen = C99CodeGen()
 
     routines = [
-        make_routine('c_dS_CR3BP', [S_mat, mu], [dS_eq], var_map=matrix_map),
-        make_routine('c_dSTM_CR3BP', [S_mat, STM_mat, mu], [dS_eq, dSTM_eq], var_map=matrix_map)
+        make_routine(
+            'c_dS_CR3BP',
+            [S_mat, mu],
+            [dS_eq],
+            var_map=matrix_map
+        ),
+        make_routine(
+            'c_dSTM_CR3BP',
+            [S_mat, STM_mat, mu],
+            [dS_eq, dSTM_eq],
+            var_map=matrix_map
+        )
     ]
 
-    gen.write(routines, 'test/c_CR3BP', to_files=True, header=False, empty=False)
+    gen.write(
+        routines,
+        'test/c_CR3BP',
+        to_files=True,
+        header=False,
+        empty=False
+    )
