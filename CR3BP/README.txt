@@ -1,5 +1,8 @@
 To compile the CR3BP Cython file:
 
-1) Run 'make_dS_CR3BP.py' to generate the C headers and source.
+1)
+Run 'make_dS_CR3BP.py' to generate the C headers and source.
 
-2) Run 'setup.py build_ext --inplace' to compile the cython file and C source to a pyd file.
+2)
+Run 'python -m setup build_ext --inplace' from this directory to compile the
+cython file and C source to a pyd file.
