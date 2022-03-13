@@ -1,6 +1,8 @@
+.env/
 build/
 __pycache__/
 
 CR3BP/*.c
 CR3BP/*.h
 CR3BP/*.pyd
+CR3BP/*.so
