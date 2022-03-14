@@ -1,5 +1,3 @@
-import os
-
 import sympy as sp
 from sympy.utilities.codegen import C99CodeGen
 
@@ -56,12 +54,9 @@ if __name__ == '__main__':
         )
     ]
 
-    dirpath = os.path.dirname(os.path.abspath(__file__))
-    c_path = os.path.join(dirpath, 'c_CR3BP')
-
     gen.write(
         routines,
-        c_path,
+        'c_CR3BP',
         to_files=True,
         header=False,
         empty=False
